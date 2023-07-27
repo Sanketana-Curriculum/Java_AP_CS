@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class Chatbot {
+
+  public static void main(String[] args) {
+  
+    Scanner scanner = new Scanner(System.in);
+
+    // Get user's name
+    System.out.print("What is your name? ");
+    String name = scanner.nextLine();
+
+    System.out.println("Nice to meet you " + name);
+
+    // Get user's age
+    System.out.print("What is your age? ");
+    int age = scanner.nextInt();
+
+    System.out.println("You are " + age + " years old");
+
+    // Get favorite food
+    scanner.nextLine(); // Consume newline left by nextInt()
+    System.out.print("What is your favorite food? ");
+    String food = scanner.nextLine();
+
+    System.out.println("Your favorite food is " + food);
+
+    // Get hometown
+    System.out.print("What is your hometown? ");
+    String hometown = scanner.nextLine();
+
+    System.out.println("Your hometown is " + hometown);
+
+    System.out.println("Thank you for chatting with me!");
+
+  }
+
+}

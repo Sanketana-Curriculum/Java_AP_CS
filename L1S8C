@@ -1,0 +1,17 @@
+import java.util.Scanner;
+
+public class Calculator {
+
+  public static void main(String[] args) {
+
+    Scanner scanner = new Scanner(System.in);
+
+    // Get the age
+    System.out.print("Enter first number: ");
+    int age = scanner.nextInt();
+
+    System.out.println(age >= 18 ); // Prints false or true
+
+  }
+
+}

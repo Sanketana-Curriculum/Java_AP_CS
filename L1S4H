@@ -1,0 +1,17 @@
+public class Main {
+
+  public static void main(String[] args) {
+
+    // Declare variables to store exam scores
+    int mathScore = 95;
+    int scienceScore = 88;
+    int historyScore = 79;
+
+    // Print out scores along with subject name
+    System.out.println("Math score: " + mathScore);
+    System.out.println("Science score: " + scienceScore); 
+    System.out.println("History score: " + historyScore);
+
+  }
+
+}

@@ -1,0 +1,29 @@
+public class Car {
+
+  // Fields
+  String color;
+  String make;
+  int year; 
+  String name;
+  String engine;
+
+  // run() method
+  public void run(int speed) {
+    System.out.println(name + " is running at " + speed + " mph");
+  }
+
+  // stop() method
+  public void stop() {
+    System.out.println(name + " has stopped.");
+  }
+Car myCar = new Car();
+myCar.color = "Red";
+myCar.make = "Toyota";
+
+myCar.run(50); 
+// Prints "myCar is running at 50 mph"
+
+myCar.stop();
+// Prints "myCar has stopped."
+
+}

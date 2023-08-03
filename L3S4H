@@ -1,0 +1,100 @@
+import java.util.Scanner;
+
+class Account {
+
+  private int balance;
+  private int pin;
+
+  public int getBalance() {
+    return balance;
+  }
+
+  public void deposit(int amount) {
+    balance += amount;
+  }
+
+  public void withdraw(int amount) {
+    if(balance >= amount) {
+      balance -= amount;
+    } else {
+      System.out.println("Insufficient balance!");
+    }
+  }
+
+  public Account(int pin) {
+    this.pin = pin;
+  }
+
+  public boolean validatePin(int inputPin) {
+    return pin == inputPin;
+  }
+
+}
+
+public class ATM {
+
+  public static void main(String[] args) {
+    
+    // Create account
+    Account account = new Account(1234);
+
+    while(true) {
+
+      // Enter pin
+      System.out.print("Enter pin: ");
+      Scanner sc = new Scanner(System.in);
+      int inputPin = sc.nextInt();
+
+      // Validate pin
+      if(!account.validatePin(inputPin)) {
+        System.out.println("Incorrect pin!");
+      } else {
+       // Validate pin 
+if(!account.validatePin(inputPin)) {
+  // Invalid pin logic
+
+} else {
+
+  // Display menu
+  System.out.println("\nWelcome to ATM!");
+  System.out.println("1. Check Balance");
+  System.out.println("2. Withdraw Funds");
+  System.out.println("3. Deposit Funds");
+  System.out.println("4. Exit\n");
+  
+  // Read choice
+  int choice = sc.nextInt();
+
+  switch(choice) {
+    case 1: 
+      // Check balance
+      System.out.println("Balance is: " + account.getBalance());
+      break;
+
+    case 2:
+      // Withdraw funds
+      // ...
+      break;
+
+    case 3: 
+      // Deposit funds  
+      // ...
+      break;
+    
+    case 4:
+      // Exit
+      break;
+
+    default:
+      System.out.println("Invalid choice");
+  }
+
+}
+        break;
+      }
+
+    }
+
+  } 
+
+}

@@ -1,0 +1,50 @@
+public class BankAccount {
+
+  // Fields
+  public String owner;
+  public double balance;
+  public long accountNumber;
+  public duoble last_deposit;
+  public double last_withdraw;
+
+  // Constructor
+  public BankAccount(String name, double initialBalance) {
+    owner = name;
+    balance = initialBalance;
+    accountNumber = generateAccountNumber(); // generate random number
+  }
+
+  // Generate random account number
+  private long generateAccountNumber() {
+    return (long)(Math.random() * 100000000); 
+  }
+
+  // Deposit method
+  public void deposit(double amount) {
+    balance += amount;
+    last_deposit = amount;
+  }
+  public double getLastDeposit() {
+    return last_deposit;
+  }
+
+  public double getLastWithdraw() {
+    return last_withdraw;
+  }
+
+  // Withdraw method
+  public void withdraw(double amount) {
+    if(balance >= amount) {
+      balance -= amount;
+      last_withdraw = amount;
+    } else {
+      System.out.println("Insufficient balance!");
+    }
+  }
+
+  // Get balance method
+  public double getBalance() {
+    return balance;
+  }
+
+}

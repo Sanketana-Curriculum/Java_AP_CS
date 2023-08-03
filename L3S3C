@@ -1,0 +1,39 @@
+public class BankAccount {
+
+  // Fields
+  public String owner;
+  public double balance;
+  public long accountNumber;
+
+  // Constructor
+  public BankAccount(String name, double initialBalance) {
+    owner = name;
+    balance = initialBalance;
+    accountNumber = generateAccountNumber(); // generate random number
+  }
+
+  // Generate random account number
+  private long generateAccountNumber() {
+    return (long)(Math.random() * 100000000); 
+  }
+
+  // Deposit method
+  public void deposit(double amount) {
+    balance += amount;
+  }
+
+  // Withdraw method
+  public void withdraw(double amount) {
+    if(balance >= amount) {
+      balance -= amount;
+    } else {
+      System.out.println("Insufficient balance!");
+    }
+  }
+
+  // Get balance method
+  public double getBalance() {
+    return balance;
+  }
+
+}

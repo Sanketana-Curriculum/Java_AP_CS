@@ -1,0 +1,61 @@
+public class Pizza {
+
+  private String size;
+  private String crust;
+  private List<String> toppings;
+
+  // Overloaded constructors
+  public Pizza() {
+    this.size = "Medium";
+    this.crust = "Regular";
+    this.toppings = new ArrayList();
+  }
+
+  public Pizza(String size) {
+    this.size = size;
+    this.crust = "Regular";
+    this.toppings = new ArrayList();
+  }
+
+  public Pizza(String size, String crust) {
+    this.size = size;
+    this.crust = crust;
+    this.toppings = new ArrayList();
+  }
+
+  // Setters and getters
+
+  // Add topping method
+  public void addTopping(String topping) {
+    this.toppings.add(topping); 
+  }
+
+  // Order summary method
+  public void printOrder() {
+    // Print order details
+  }
+  
+}
+
+
+public class PizzaApp {
+
+  public static void main(String[] args) {
+    
+    // Create pizzas using different constructors
+    Pizza p1 = new Pizza();
+    Pizza p2 = new Pizza("Large");
+    Pizza p3 = new Pizza("Small", "Thin Crust");
+
+    // Add toppings
+    p1.addTopping("Pepperoni");
+    p2.addTopping("Mushrooms");
+
+    // Print orders
+    p1.printOrder();
+    p2.printOrder();
+    p3.printOrder();
+
+  }
+
+}

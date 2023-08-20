@@ -1,0 +1,48 @@
+// Vehicle superclass
+public class Vehicle {
+
+  private String name;
+  private int numWheels;
+  private int numDoors;
+  private String color;
+
+  public Vehicle(String name, int wheels, int doors, String color) {
+    this.name = name;
+    this.numWheels = wheels;
+    this.numDoors = doors;
+    this.color = color;
+  }
+
+  // Turn, brake, accelerate behaviors
+  public void turn(Direction direction) {
+    // Logic to turn vehicle
+  }
+
+  public void brake() {
+    // Logic to brake vehicle
+  }  
+
+  public void accelerate(int speed) {
+    // Logic to accelerate vehicle
+  }
+
+}
+
+// Car subclass
+public class Car extends Vehicle {
+
+  public Car(String name, int wheels, int doors, String color) {
+    super(name, wheels, doors, color);
+  }
+
+}
+
+// Truck subclass
+public class Truck extends Vehicle {
+
+  public Truck(String name, int wheels, int doors, String color) {
+    super(name, wheels, doors, color);
+  }
+
+}
+

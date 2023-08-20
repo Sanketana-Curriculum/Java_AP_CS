@@ -1,0 +1,55 @@
+import java.util.Scanner;
+
+class User {
+
+  private String userId;
+  private String password;
+  
+  // Constructor, getters and setters
+
+}
+
+public class Authentication {
+
+  private User user;
+
+  public void signup() {
+    
+    Scanner input = new Scanner(System.in);
+
+    System.out.print("Enter user id: ");
+    String userId = input.nextLine();
+
+    System.out.print("Enter password: "); 
+    String password = input.nextLine();
+    
+    // Create User object
+    user = new User(userId, password); 
+    
+  }
+
+  public void login() {
+    
+    Scanner input = new Scanner(System.in);
+    
+    // Take input
+    
+    if(userId.equals(user.getUserId()) && 
+       password.equals(user.getPassword())) {
+        
+      System.out.println("Login successful!");
+      
+    } else {
+      System.out.println("Invalid credentials");
+    }
+  }
+
+  public static void main(String[] args) {
+  
+    Authentication auth = new Authentication();
+    auth.signup();
+    auth.login();
+
+  }
+
+}

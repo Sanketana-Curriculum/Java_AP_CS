@@ -1,0 +1,50 @@
+// Vehicle superclass
+public class Vehicle {
+
+  private String name;
+
+  public Vehicle(String name) {
+    this.name = name;
+  }
+
+  public void start() {
+    System.out.println(name + " started!");
+  }
+
+  public void stop() {
+    System.out.println(name + " stopped!");
+  }
+
+}
+
+// Car subclass extends Vehicle
+public class Car extends Vehicle {
+
+  public Car(String name) {
+    super(name);
+  }
+
+  @Override
+  public void start() {
+    super.start();
+    System.out.println("Ignition turned on");  
+  }
+
+}
+
+// Car factory makes Cars
+public class CarFactory {
+  
+  public static Car buildCar(String name) {
+    return new Car(name);
+  }
+
+  public static void main(String[] args) {
+    
+    Car myCar = buildCar("My Car");
+    myCar.start();
+    myCar.stop();
+
+  }
+
+}

@@ -1,0 +1,66 @@
+// Student.java
+
+import java.util.ArrayList;
+
+public class Student {
+  
+  private String name;
+  private ArrayList<Integer> grades;
+  
+  public Student(String name) {
+    this.name = name;
+    this.grades = new ArrayList<Integer>();
+  }
+  
+  public void addGrade(int grade) {
+    grades.add(grade);
+  }
+  
+  public double getAverageGrade() {
+    int sum = 0;
+    for(int grade : grades) {
+      sum += grade;
+    }
+    return (double)sum / grades.size();
+  }
+  
+}
+
+
+// School.java
+
+import java.util.ArrayList;
+
+public class School {
+
+  private ArrayList<Student> students;
+
+  public School() {
+    students = new ArrayList<>();    
+  }
+
+  public void addStudent(String name) {
+    students.add(new Student(name));
+  }
+  
+  public void addGrade(String name, int grade) {
+    for(Student s : students) {
+      if(s.getName().equals(name)) {
+        s.addGrade(grade);
+      }
+    }
+  }
+  
+  // other methods to edit and get reports
+  
+}
+
+
+// Main.java
+
+public class Main {
+  public static void main(String[] args) {
+    School school = new School();
+    // add and use students
+  }
+}

@@ -1,0 +1,42 @@
+import java.util.Scanner;
+
+public class AgeCalculator {
+
+  public static void main(String[] args) {
+
+    Scanner sc = new Scanner(System.in);
+
+    int todayYear = 2023;
+    int todayMonth = 10; 
+    int todayDay = 11;
+
+    System.out.print("Enter your birth year (YYYY): ");
+    int dobYear = sc.nextInt();
+
+    System.out.print("Enter your birth month (MM): "); 
+    int dobMonth = sc.nextInt();
+
+    System.out.print("Enter your birth day (DD): ");
+    int dobDay = sc.nextInt();
+
+    int age = calculateAge(dobYear, dobMonth, dobDay);
+
+    System.out.println("Your age is: " + age);
+
+  }
+
+  public static int calculateAge(int birthYear, int birthMonth, int birthDay) {
+
+    int age = todayYear - birthYear;
+
+    if (todayMonth < birthMonth) {
+      age--;
+    } else if (todayMonth == birthMonth && todayDay < birthDay) {
+      age--;
+    }
+
+    return age;
+
+  }
+
+}

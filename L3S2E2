@@ -1,0 +1,24 @@
+public class FuelCalculator {
+
+  public static int calculateNeededFuel(int distance) {
+
+    int fuelNeeded = distance * 10;
+    
+    if(fuelNeeded < 100) {
+      return 100; 
+    } else {
+      return fuelNeeded;
+    }
+
+  }
+
+  public static void main(String[] args) {
+    
+    int distance = 50;
+    int fuel = calculateNeededFuel(distance);
+    
+    System.out.println("For distance " + distance + 
+                       ", fuel needed is: " + fuel);
+  }
+
+}

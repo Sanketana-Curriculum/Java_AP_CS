@@ -1,0 +1,24 @@
+import java.util.Scanner;
+
+public class CoffeeCups {
+
+  public static int totalCups(int bought) {
+     
+    int freeCups = boughtCups / 6;
+    return boughtCups + freeCups;
+  } 
+
+  public static void main(String[] args) {
+
+    Scanner sc = new Scanner(System.in);
+
+    System.out.print("Enter number of cups bought: ");
+    int cupsBought = sc.nextInt();
+
+    int total = totalCups(cupsBought);
+
+    System.out.println("Total cups: " + total);
+
+  }
+
+}

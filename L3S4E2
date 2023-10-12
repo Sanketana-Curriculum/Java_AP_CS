@@ -1,0 +1,52 @@
+import java.util.Random;
+
+public class MathProblem {
+
+  private int num1;
+  private int num2;
+  private String operator;
+
+  public MathProblem() {
+    Random rand = new Random();
+    this.num1 = rand.nextInt(100);
+    this.num2 = rand.nextInt(100);
+    int op = rand.nextInt(4);
+    if(op == 0) {
+      this.operator = "+"; 
+    } else if(op == 1) {
+      this.operator = "-";
+    } else if(op == 2) {  
+      this.operator = "*";
+    } else {
+      this.operator = "/"; 
+    }
+  }
+
+  public String getProblem() {
+    return num1 + " " + operator + " " + num2; 
+  }
+  
+  public int getAnswer() {
+    switch(operator) {
+      case "+":
+        return num1 + num2;
+      case "-":
+        return num1 - num2;
+      case "*":
+        return num1 * num2;
+      case "/":
+        return num1 / num2;
+      default:
+        return 0;
+    }
+  }
+
+}
+
+public class Main {
+  public static void main(String[] args) {
+    MathProblem problem = new MathProblem();
+    System.out.println(problem.getProblem());
+    System.out.println("Answer: " + problem.getAnswer());
+  }
+}

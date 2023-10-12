@@ -1,22 +1,23 @@
+import java.util.Scanner;
 import java.util.Random;
-
-public class DiceRoller {
+public class Main {
 
   public static void main(String[] args) {
 
-    Random rand = new Random(); 
+    Scanner scanner = new Scanner(System.in); 
+    Random rand = new Random();
 
     while(true) {
 
-      // Check for space key to roll dice  
-      if(System.in.read() == ' ') {
+      System.out.print("Press Enter to roll: ");
+      String input = scanner.nextLine();
 
-        // Generate random 1-6
+      if(input.equals("p")) {
+
         int roll = rand.nextInt(6) + 1;
 
         System.out.println("You rolled a " + roll);
 
-        // Print message based on roll
         if(roll == 1) {
           System.out.println("Tough luck, try again!");
         } else if(roll == 6) {
@@ -24,15 +25,14 @@ public class DiceRoller {
         } else {
           System.out.println("Not bad!");
         }
-      }
 
-      // Check for enter key to exit
-      if(System.in.read() == '\n') {
+      } else if(input.equals("e")) {
         break;
       }
 
     }
 
+    scanner.close();
     System.out.println("Thanks for playing!");
 
   }

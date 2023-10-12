@@ -1,0 +1,27 @@
+public static void main(String[] args) {
+
+  boolean isSafeBridge(String bridge) {
+
+    for(int i=0; i < bridge.length(); i++) {
+        
+      char c = bridge.charAt(i);
+        
+      if(c == ' ') {
+        return false;
+      }
+    
+    }
+
+    return true;
+  
+  }
+
+  String bridge1 = "####";
+  System.out.println(bridge1 + ": " + isSafeBridge(bridge1));
+
+  String bridge2 = "## ####";
+  System.out.println(bridge2 + ": " + isSafeBridge(bridge2));
+
+  // Test more bridges
+  
+}

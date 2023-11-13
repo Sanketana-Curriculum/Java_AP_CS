@@ -1,0 +1,66 @@
+import java.util.Scanner;
+
+class Ticket {
+  
+  // Private attributes
+  private String issue;
+  private String priority;
+  
+  // Getter methods
+  public String getIssue() {
+    return issue;
+  }
+  
+  public String getPriority() {
+    return priority;
+  }
+  
+  // Setter methods
+  public void setIssue(String issue) {
+    this.issue = issue;
+  }
+  
+  public void setPriority(String priority) {
+    this.priority = priority;
+  }
+}
+
+public class HelpDesk {
+
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    
+    // Get issue from user
+    System.out.print("Enter the issue: ");
+    String issue = sc.nextLine();
+    
+    // Get priority from user
+    System.out.print("Enter priority level (High/Medium/Low): ");
+    String priority = sc.nextLine();
+    
+    // Create ticket
+    Ticket ticket = new Ticket();
+    ticket.setIssue(issue);
+    ticket.setPriority(priority);
+    
+    // Print ticket details
+    System.out.println("\nTicket Details:");
+    System.out.println("Issue: " + ticket.getIssue());
+    System.out.println("Priority: " + ticket.getPriority());
+    
+    // Classify priority
+    if(priority.equalsIgnoreCase("High")) {
+      System.out.println("This is a critical issue.");
+    }
+    else if(priority.equalsIgnoreCase("Medium")) {
+      System.out.println("This issue will be handled soon.");
+    }
+    else if(priority.equalsIgnoreCase("Low")) {
+      System.out.println("This issue will be handled later.");
+    }
+    else {
+      System.out.println("Invalid priority");
+    }
+  }
+  
+}

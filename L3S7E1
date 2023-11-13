@@ -1,0 +1,39 @@
+public class Main {
+
+  public static void main(String[] args) {
+
+    String sentence = "hello world hello universe";
+
+    // Split sentence into words
+    String[] words = sentence.split(" ");
+
+    // Capitalize first and last letter of each word
+    for(int i=0; i<words.length; i++) {
+      words[i] = capitalize(words[i]); 
+    }
+
+    // Join words back to get sentence
+    sentence = String.join(" ", words);
+    System.out.println(sentence);
+
+    // Count duplicate words
+    int dupCount = 0;
+    for(int i=0; i<words.length; i++) {
+      for(int j=i+1; j<words.length; j++) {
+        if(words[i].equals(words[j])) {
+          dupCount++; 
+        }
+      }
+    }
+
+    System.out.println("Duplicate words: " + dupCount);
+    
+  }
+
+  public static String capitalize(String word) {
+    return word.substring(0,1).toUpperCase() + 
+           word.substring(1, word.length()-1) +
+           word.substring(word.length()-1).toUpperCase(); 
+  }
+  
+}

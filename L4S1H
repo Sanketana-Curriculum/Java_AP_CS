@@ -1,0 +1,33 @@
+import java.io.*;
+
+public class Converter {
+  
+  public static void main(String[] args) throws IOException {
+
+    File csvFile = new File("data.csv");
+    File jsonFile = new File("data.json");
+
+    //read CSV file line by line
+    BufferedReader reader = new BufferedReader(new FileReader(csvFile));
+
+    //write JSON file
+    BufferedWriter writer = new BufferedWriter(new FileWriter(jsonFile));
+
+    String line = reader.readLine();
+    while (line != null) {
+      //parse CSV and convert to JSON
+      writer.write(csvToJson(line));  
+      line = reader.readLine();
+    }
+
+    reader.close();
+    writer.close();
+
+  }
+
+  public static String csvToJson(String line) {
+    //csv to json conversion logic
+    return json; 
+  }
+
+}

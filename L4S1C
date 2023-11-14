@@ -1,0 +1,49 @@
+import java.io.*;
+import java.util.Scanner;
+
+public class TextEditor {
+
+  public static void main(String[] args) throws IOException {
+
+    Scanner scan = new Scanner(System.in);
+
+    while(true) {
+    
+      System.out.print("Enter txt file to open: ");
+      String file = scan.nextLine();
+
+      RandomAccessFile raf = new RandomAccessFile(file, "rw");
+      
+      String content = raf.readLine();
+      while(content != null) {
+        content += "\n" + raf.readLine();
+      }
+
+      System.out.println("\n1. Read File\n2. Edit File\n3. Save File\n4. Exit");
+      
+      int option = Integer.parseInt(scan.nextLine());
+      
+      if(option == 1) {
+        System.out.println(content);
+        
+      } else if(option == 2) {
+        System.out.println("Enter new content: ");
+        content = scan.nextLine();
+        
+      } else if(option == 3) {
+        raf.seek(0);
+        raf.writeBytes(content);
+        System.out.println("File saved!");
+        
+      } else if(option == 4) {
+        System.exit(0);
+        
+      } else {
+        System.out.println("Invalid option");
+      }
+
+    }
+
+  }
+
+}

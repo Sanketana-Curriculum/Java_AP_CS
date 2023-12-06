@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+public class ValueChecker {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Sample array
+        int[] numbers = {34, 12, 56, 78, 21, 45, 89, 67};
+
+        // Input value to check
+        System.out.print("Enter a value to check: ");
+        int targetValue = scanner.nextInt();
+
+        // Check if the value is present
+        boolean isPresent = isValuePresent(numbers, targetValue);
+
+        // Display the result
+        System.out.println("Array: " + arrayToString(numbers));
+        System.out.println("Is " + targetValue + " present in the array? " + isPresent);
+
+        scanner.close();
+    }
+
+    // Method to check if a specific value is present in the array
+    private static boolean isValuePresent(int[] arr, int target) {
+        for (int num : arr) {
+            if (num == target) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Helper method to convert an array to a string for display
+    private static String arrayToString(int[] arr) {
+        StringBuilder result = new StringBuilder("[");
+        for (int i = 0; i < arr.length; i++) {
+            result.append(arr[i]);
+            if (i < arr.length - 1) {
+                result.append(", ");
+            }
+        }
+        result.append("]");
+        return result.toString();
+    }
+}

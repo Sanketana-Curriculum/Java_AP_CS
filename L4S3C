@@ -1,0 +1,67 @@
+import java.util.Scanner;
+
+public class IdentityMatrixChecker {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the number of rows in the matrix: ");
+        int rows = scanner.nextInt();
+
+        System.out.print("Enter the number of columns in the matrix: ");
+        int columns = scanner.nextInt();
+
+        int[][] matrix = new int[rows][columns];
+
+        // Input matrix elements
+        System.out.println("Enter the matrix elements:");
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                System.out.print("Matrix[" + i + "][" + j + "]: ");
+                matrix[i][j] = scanner.nextInt();
+            }
+        }
+
+        // Check if the matrix is an identity matrix
+        boolean isIdentityMatrix = checkIdentityMatrix(matrix);
+
+        // Display the result
+        System.out.println("Entered Matrix:");
+        displayMatrix(matrix);
+        System.out.println("Is the matrix an identity matrix? " + isIdentityMatrix);
+
+        scanner.close();
+    }
+
+    // Method to check if a matrix is an identity matrix
+    private static boolean checkIdentityMatrix(int[][] matrix) {
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+
+        // Check if the matrix is square
+        if (rows != columns) {
+            return false;
+        }
+
+        // Check main diagonal elements
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                if ((i == j && matrix[i][j] != 1) || (i != j && matrix[i][j] != 0)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    // Helper method to display a matrix
+    private static void displayMatrix(int[][] matrix) {
+        for (int[] row : matrix) {
+            for (int element : row) {
+                System.out.print(element + " ");
+            }
+            System.out.println();
+        }
+    }
+}

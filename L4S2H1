@@ -1,0 +1,51 @@
+Lpublic class MaxMinFinder {
+
+    public static void main(String[] args) {
+        // Sample array
+        int[] numbers = {34, 12, 56, 78, 21, 45, 89, 67};
+
+        // Find maximum and minimum values
+        int max = findMax(numbers);
+        int min = findMin(numbers);
+
+        // Display the results
+        System.out.println("Array: " + arrayToString(numbers));
+        System.out.println("Maximum Value: " + max);
+        System.out.println("Minimum Value: " + min);
+    }
+
+    // Method to find the maximum value in an array
+    private static int findMax(int[] arr) {
+        int max = arr[0];
+        for (int num : arr) {
+            if (num > max) {
+                max = num;
+            }
+        }
+        return max;
+    }
+
+    // Method to find the minimum value in an array
+    private static int findMin(int[] arr) {
+        int min = arr[0];
+        for (int num : arr) {
+            if (num < min) {
+                min = num;
+            }
+        }
+        return min;
+    }
+
+    // Helper method to convert an array to a string for display
+    private static String arrayToString(int[] arr) {
+        StringBuilder result = new StringBuilder("[");
+        for (int i = 0; i < arr.length; i++) {
+            result.append(arr[i]);
+            if (i < arr.length - 1) {
+                result.append(", ");
+            }
+        }
+        result.append("]");
+        return result.toString();
+    }
+}

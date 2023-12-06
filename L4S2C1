@@ -1,0 +1,39 @@
+import java.util.Scanner;
+
+public class TemperatureAnalyzer {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Create an array to store temperatures for the last 7 days
+        double[] temperatures = new double[7];
+
+        // Input temperatures from the user
+        for (int i = 0; i < 7; i++) {
+            System.out.print("Enter temperature for day " + (i + 1) + ": ");
+            temperatures[i] = scanner.nextDouble();
+        }
+
+        // Calculate the average temperature
+        double sum = 0;
+        for (double temperature : temperatures) {
+            sum += temperature;
+        }
+        double averageTemperature = sum / temperatures.length;
+
+        // Display the temperatures and average
+        System.out.println("\nTemperatures for the last 7 days:");
+        displayTemperatures(temperatures);
+
+        System.out.println("\nAverage Temperature: " + averageTemperature + "°C");
+
+        scanner.close();
+    }
+
+    // Helper method to display temperatures
+    private static void displayTemperatures(double[] temperatures) {
+        for (int i = 0; i < temperatures.length; i++) {
+            System.out.println("Day " + (i + 1) + ": " + temperatures[i] + "°C");
+        }
+    }
+}

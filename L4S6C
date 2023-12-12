@@ -1,0 +1,71 @@
+import java.util.*;
+
+class Stack {
+
+    char[] arr;
+    int top;
+
+    Stack(int size) {
+        arr = new char[size];
+        top = -1;
+    }
+
+    void push(char c) {
+        if(top == arr.length-1) {
+            System.out.println("Stack Full");
+        }
+        else {
+            arr[++top] = c;
+        }
+    }
+
+    char pop() {
+        if(top == -1) {
+            System.out.println("Stack empty");
+            return 0;
+        }
+        else {
+            return arr[top--]; 
+        }
+    }
+}
+
+class Main {
+
+    static boolean findDuplicate(String exp) {
+        
+        Stack stack = new Stack(100); 
+        
+        for(int i =0; i<exp.length(); i++) {
+        
+            char ch = exp.charAt(i);
+        
+            if(ch == ')') {
+                char top = stack.pop();
+                boolean flag = true;
+                
+                while(top != '(') {
+                    if(top == ')') {
+                        return true;       
+                    }
+                    top = stack.pop();
+                }
+            }
+            else {
+                stack.push(ch); 
+            }
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+    
+        String exp = "(((a+b))+(c+d))"; 
+        if(findDuplicate(exp)) {
+            System.out.println("Duplicate Found");
+        }
+        else {
+            System.out.println("No Duplicates"); 
+        }   
+    }
+}

@@ -1,0 +1,76 @@
+//Entire code 
+
+public class DoublyLinkedList {
+
+    private Node head;
+    private Node tail;
+
+    private static class Node {
+        private int data;
+        private Node prev;
+        private Node next;
+
+        public Node(int data) {
+            this.data = data;
+        }
+    }
+   
+    // Insert at head
+    public void insertHead(int value) {
+        Node newNode = new Node(value);  
+        newNode.next = head; 
+        if (head != null)
+            head.prev = newNode;
+        head = newNode;
+        if (tail == null)  
+            tail = newNode;
+    }
+
+    // Insert at tail 
+    public void insertTail(int value) {
+        Node newNode = new Node(value);
+        if (tail == null) {
+            head = newNode;
+            tail = newNode;
+            return;
+        }
+        tail.next = newNode;
+        newNode.prev = tail;
+        tail = newNode;
+    }
+
+    // Print doubly linked list
+    public void printList() { 
+        Node curr = head; 
+        while (curr != null) {
+            System.out.print(curr.data+ " ");
+            curr = curr.next;
+        }
+    }  
+}
+
+//Code to convert Circular to doubly linked list 
+
+Node convertToDLL(Node head) {
+
+  //1. Reverse linked list  
+  Node prev = null;
+  Node curr = head;
+  Node next;
+  
+  while(curr!=null) {
+    next = curr.next;
+    curr.next = prev;    
+    prev = curr;
+    curr = next;
+  }
+
+  //2. Convert to DLL
+  Node temp = prev; 
+  while(prev != null) {
+    prev.prev = temp;
+    temp = temp.next;
+  }
+  
+  return prev;  
+}

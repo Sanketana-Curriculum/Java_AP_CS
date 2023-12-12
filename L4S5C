@@ -1,0 +1,78 @@
+//Entire Circular list code 
+
+public class CircularLinkedList {
+
+    private Node head; 
+    private Node tail;
+
+    private static class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+        }
+    }
+
+    // Insert at head 
+    public void insertHead(int value) {
+        Node newNode = new Node(value);  
+        if (head == null) {
+            head = newNode;
+            tail = newNode;  
+            newNode.next = head; 
+        }
+        else {
+            Node temp = head;
+            newNode.next = temp;
+            head = newNode;
+            tail.next = head; 
+        }
+
+    }
+
+    // Insert at tail
+    public void insertTail(int value) {
+        Node newNode = new Node(value);
+        if (head == null) {
+            head = newNode;
+            tail = newNode;
+            newNode.next = head;
+        }
+        else {
+            tail.next = newNode;
+            tail = newNode;
+            tail.next = head;  
+        }
+    }
+
+    // Print circular linked list 
+    public void printList() {
+        if (head != null) {
+            Node temp = head;
+            do {
+                System.out.print(temp.data + " ");
+                temp = temp.next;
+            } while (temp != head);  
+        }
+        
+    }
+    
+}
+
+//Convert single list to circular 
+
+void convertToCircular(Node head) {
+
+  if(head == null)  
+    return;
+    
+  Node temp = head;
+  
+  while(temp.next != null)  
+    temp = temp.next;
+
+  // Make circular  
+  temp.next = head; 
+}
+Traverse SLL till end. Point last node to first node.

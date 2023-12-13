@@ -1,0 +1,75 @@
+import java.util.*;
+
+class Queue {
+    
+    int arr[];
+    int front, rear;
+    
+    Queue(int size) {
+        arr = new int[size];
+        front = 0;
+        rear = -1;  
+    }
+    
+    void enqueue(int x) {
+        if(rear == arr.length-1) {
+            System.out.println("Queue Full"); 
+            return;
+        }
+        rear++;
+        arr[rear] = x; 
+    }
+    
+    int dequeue() {
+        if(front > rear) {
+            System.out.println("Queue Empty");
+            return -1; 
+        } else {
+            return arr[front++]; 
+        }
+    }
+}
+
+class Stack {
+    
+    Queue q1 = new Queue(100); 
+    Queue q2 = new Queue(100);
+
+    void push(int x) {
+        
+        //Enqueue element to first queue
+        q1.enqueue(x);    
+    }
+
+    int pop() {
+       
+        //Return if both queues are empty 
+        if (q1.front == 0 && q2.front == 0) {
+            System.out.println("Stack Underflow");
+            return -1;
+        }
+       
+        //Move elements to second queue  
+        while(q1.front != 0) {
+            q2.enqueue(q1.dequeue()); 
+        }
+       
+        //Interchange names  
+        Queue temp = q1;
+        q1 = q2;
+        q2 = temp;
+       
+        //Return top element of q1  
+        return q1.dequeue();
+    } 
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Stack s = new Stack(); 
+        s.push(5); 
+        s.push(8);  
+        System.out.println(s.pop());  
+        System.out.println(s.pop()); 
+    }
+}

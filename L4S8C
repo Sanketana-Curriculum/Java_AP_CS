@@ -1,0 +1,39 @@
+import java.util.Scanner;
+
+public class WordPermutations {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input the word
+        System.out.print("Enter a word: ");
+        String word = scanner.nextLine();
+
+        // Generate and print permutations
+        System.out.println("Permutations of the word \"" + word + "\":");
+        generatePermutations(word.toCharArray(), 0, word.length() - 1);
+
+        scanner.close();
+    }
+
+    // Recursive function to generate permutations
+    private static void generatePermutations(char[] wordArray, int left, int right) {
+        if (left == right) {
+            // Base case: permutation found, print it
+            System.out.println(new String(wordArray));
+        } else {
+            // Swap characters and recursively generate permutations
+            for (int i = left; i <= right; i++) {
+                swap(wordArray, left, i);
+                generatePermutations(wordArray, left + 1, right);
+                swap(wordArray, left, i); // Backtrack to the original state
+            }
+        }
+    }
+
+    // Helper function to swap characters in an array
+    private static void swap(char[] array, int i, int j) {
+        char temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}

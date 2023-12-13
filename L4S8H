@@ -1,0 +1,17 @@
+// Reverse a string using Stack
+String str = "Hello";
+
+Stack<Character> chars = new Stack<>();
+
+// Push all chars to stack  
+for(char c: str.toCharArray()){
+  chars.push(c);
+}
+
+// Pop back to a StringBuilder
+StringBuilder reverseStr = new StringBuilder();  
+
+while(!chars.empty()){
+  reverseStr.append(chars.pop());   
+}
+System.out.println(reverseStr); // olleH

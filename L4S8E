@@ -1,0 +1,53 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class ElementFrequencyWithQueue {
+    public static void main(String[] args) {
+        int[] elements = {1, 2, 3, 2, 4, 1, 5, 3, 1, 4, 2};
+
+        // Find and print the frequency of each element
+        findElementFrequency(elements);
+    }
+
+    private static void findElementFrequency(int[] elements) {
+        Queue<Integer> elementQueue = new LinkedList<>();
+        Queue<Integer> frequencyQueue = new LinkedList<>();
+
+        // Process each element in the array using two queues
+        for (int element : elements) {
+            boolean isNewElement = true;
+
+            // Check if the element is already in the queue
+            int size = elementQueue.size();
+            for (int i = 0; i < size; i++) {
+                int currentElement = elementQueue.poll();
+                int currentFrequency = frequencyQueue.poll();
+
+                // If the element is found, update its frequency and mark as not new
+                if (currentElement == element) {
+                    currentFrequency++;
+                    frequencyQueue.offer(currentFrequency);
+                    isNewElement = false;
+                } else {
+                    // Put the non-matching element back into the queues
+                    elementQueue.offer(currentElement);
+                    frequencyQueue.offer(currentFrequency);
+                }
+            }
+
+            // If the element is new, add it to the queues with frequency 1
+            if (isNewElement) {
+                elementQueue.offer(element);
+                frequencyQueue.offer(1);
+            }
+        }
+
+        // Print the frequencies
+        System.out.println("Element Frequencies:");
+        while (!elementQueue.isEmpty()) {
+            int currentElement = elementQueue.poll();
+            int currentFrequency = frequencyQueue.poll();
+            System.out.println("Element " + currentElement + ": " + currentFrequency + " times");
+        }
+    }
+}

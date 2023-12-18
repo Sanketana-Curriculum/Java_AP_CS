@@ -1,0 +1,30 @@
+import java.util.Scanner; 
+
+public class SquareRoot {
+
+    public static double squareRoot(double number) {
+        double sqrt = number / 2;
+        double temp;
+        
+        do {
+            temp = sqrt;
+            sqrt = (temp + (number / temp)) / 2;
+        } while((temp - sqrt) != 0);
+        
+        return sqrt;
+    }
+
+    public static void main(String[] args) {
+        
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter a number: ");
+        double number = scanner.nextDouble();
+        
+        double sqrt = squareRoot(number);
+        
+        System.out.printf("Square root of %.2f is %.2f", number, sqrt);
+        
+        scanner.close();
+    }
+}

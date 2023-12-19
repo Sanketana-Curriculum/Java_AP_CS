@@ -1,5 +1,4 @@
-// Java program to delete a given key from 
-// linked list. 
+
 import java.io.*; 
 import java.util.*; 
 
@@ -124,5 +123,3 @@ circular linked list */
 		printList(head); 
 	} 
 } 
-
-// This code is contributed by Susobhan Akhuli

@@ -1,0 +1,38 @@
+class CheckPalindrome {
+
+    public static String isPossible(String arr[], int n){
+    
+        int count[] = new int[26];
+        
+        for(String str : arr) {
+            
+            for(char ch : str.toCharArray()) {
+                count[ch - 'a']++; 
+            }
+        }
+        
+        boolean odd = false;
+        
+        for(int i = 0; i<26; i++) {
+            
+            if(count[i] % 2 != 0) {
+                
+                if(odd)
+                    return "NO";
+                    
+                odd = true; 
+            }
+        }
+        
+        return "YES";
+    }
+
+    public static void main(String[] args) {
+		
+        String arr[] = {"djfh","gadt","hfjd","tdag"};
+		
+        int n = arr.length;
+		
+        System.out.print(isPossible(arr, n));
+    }
+}

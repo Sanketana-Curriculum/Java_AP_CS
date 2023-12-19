@@ -1,0 +1,30 @@
+import java.util.*;
+
+public class ReverseString {
+
+    public static String reverseWords(String str) {
+        
+        // Split the string into words 
+        String words[] = str.split("\\.");
+        
+        // Create a blank string to store result
+        String result = "";
+        
+        // Iterate in reverse order
+        for(int i = words.length-1; i >= 0; i--) {
+            
+            // Append word to result
+            result += words[i] + ".";
+        }
+        
+        // Remove extra dot at end  
+        return result.substring(0, result.length()-1);         
+    }
+
+    public static void main(String[] args) {
+    
+        String str = "i.like.this.program.very.much";
+        
+        System.out.println(reverseWords(str));
+    }
+}

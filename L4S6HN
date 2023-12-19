@@ -1,0 +1,82 @@
+class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        next = null;
+    }
+}
+
+class LinkedList {
+    Node head;
+
+    LinkedList() {
+        head = null;
+    }
+
+    void insert(int data) {
+        Node newNode = new Node(data);
+        newNode.next = head;
+        head = newNode;
+    }
+
+    void reverse() {
+        Node prev = null;
+        Node current = head;
+        Node next;
+
+        while (current != null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+
+        head = prev;
+    }
+
+    void printList() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+    }
+}
+
+public class ReverseLinkedList {
+    public static void main(String[] args) {
+        LinkedList linkedList = new LinkedList();
+
+        // Taking input for the linked list
+        linkedList = takeInput(linkedList);
+
+        System.out.println("Original Linked List:");
+        linkedList.printList();
+
+        // Reversing the linked list using the reverse function
+        reverseLinkedList(linkedList);
+
+        System.out.println("\nReversed Linked List:");
+        linkedList.printList();
+    }
+
+    // Function to take input for a linked list and return the reversed linked list
+    static LinkedList takeInput(LinkedList list) {
+        // You can customize this part to take input from the user or provide input manually
+        list.insert(1);
+        list.insert(2);
+        list.insert(3);
+        list.insert(4);
+        list.insert(5);
+        list.insert(6);
+
+        return list;
+    }
+
+    // Function to reverse a linked list
+    static void reverseLinkedList(LinkedList list) {
+        list.reverse();
+    }
+}

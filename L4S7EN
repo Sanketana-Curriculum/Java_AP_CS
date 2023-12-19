@@ -1,0 +1,38 @@
+import java.util.*;
+
+class Solution {
+    
+    public static int findUnvisited(int n, int leaves, int[] frogs) {
+        
+        boolean visited[] = new boolean[leaves + 1];
+        
+        for(int strength : frogs) {
+            
+            for(int j=strength; j<=leaves; j=j+strength) {
+                
+                visited[j] = true;
+            }
+        }
+        
+        int unvisited = 0;
+        
+        for(int i=1; i<=leaves; i++) {
+            
+            if(!visited[i]) {
+                unvisited++; 
+            }
+        }
+        
+        return unvisited;
+    }
+    
+    public static void main(String args[]) {   
+         
+        int N = 3; 
+        int leaves = 4;
+          
+        int frogs[] = {3, 2, 4};
+        
+        System.out.print(findUnvisited(N, leaves, frogs));
+    }
+}

@@ -2,41 +2,69 @@ public class Pizza {
 
   private String size;
   private String crust;
-  private List<String> toppings;
-
-  // Overloaded constructors
+  private String[] toppings;
+  
   public Pizza() {
     this.size = "Medium";
     this.crust = "Regular";
-    this.toppings = new ArrayList();
+    this.toppings = new String[5];
   }
 
   public Pizza(String size) {
     this.size = size;
     this.crust = "Regular";
-    this.toppings = new ArrayList();
+    this.toppings = new String[5]; 
   }
 
   public Pizza(String size, String crust) {
     this.size = size;
     this.crust = crust;
-    this.toppings = new ArrayList();
+    this.toppings = new String[5];
   }
 
-  // Setters and getters
-
-  // Add topping method
-  public void addTopping(String topping) {
-    this.toppings.add(topping); 
-  }
-
-  // Order summary method
-  public void printOrder() {
-    // Print order details
+  public String getSize() {
+    return this.size;
   }
   
-}
+  public void setSize(String size) {
+    this.size = size;
+  }
+  
+  public String getCrust() {
+    return this.crust;
+  }
+  
+  public void setCrust(String crust) {
+    this.crust = crust;
+  }
+  
+  public String[] getToppings() {
+    return this.toppings;
+  }
 
+  public void addTopping(String topping) {
+    for(int i = 0; i < toppings.length; i++) {
+      if(toppings[i] == null) {
+        toppings[i] = topping;
+        break;
+      }
+    }
+  }
+
+  public void printOrder() {
+    System.out.println("Pizza Details:");
+    System.out.println("- Size: " + this.size);
+    System.out.println("- Crust: " + this.crust);
+    System.out.print("- Toppings: ");
+    for(String topping : this.toppings) {
+      if(topping != null) {
+        System.out.print(topping + " "); 
+      }
+    }
+    System.out.println();
+  }
+
+}
 
 public class PizzaApp {
 

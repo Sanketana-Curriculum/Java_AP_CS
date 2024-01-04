@@ -1,55 +1,83 @@
 import java.util.Scanner;
 
+// User class to store userId and password
 class User {
 
-  private String userId;
+  // Private instance variables
+  private String userId; 
   private String password;
-  
-  // Constructor, getters and setters
+
+  // Constructor 
+  public User(String userId, String password) {
+    this.userId = userId;
+    this.password = password;
+  }
+
+  // Getters and setters
+  public String getUserId() {
+    return userId;
+  }
+
+  public void setUserId(String userId) {
+    this.userId = userId;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password; 
+  }
 
 }
 
 public class Authentication {
 
+  // User object to store credentials
   private User user;
 
   public void signup() {
-    
+  
+    // Take input
     Scanner input = new Scanner(System.in);
 
     System.out.print("Enter user id: ");
     String userId = input.nextLine();
 
-    System.out.print("Enter password: "); 
+    System.out.print("Enter password: ");
     String password = input.nextLine();
-    
-    // Create User object
-    user = new User(userId, password); 
-    
+
+    // Create User object with input
+    user = new User(userId, password);
+
   }
 
   public void login() {
-    
+
+    // Take input
     Scanner input = new Scanner(System.in);
     
-    // Take input
-    
+    System.out.print("Enter user id: ");
+    String userId = input.nextLine();
+
+    System.out.print("Enter password: ");
+    String password = input.nextLine();
+
+    // Validate input against stored credentials
     if(userId.equals(user.getUserId()) && 
        password.equals(user.getPassword())) {
-        
       System.out.println("Login successful!");
-      
     } else {
       System.out.println("Invalid credentials");
     }
+
   }
 
   public static void main(String[] args) {
-  
     Authentication auth = new Authentication();
     auth.signup();
-    auth.login();
-
+    auth.login(); 
   }
 
 }

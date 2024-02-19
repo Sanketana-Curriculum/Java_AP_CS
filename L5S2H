@@ -1,87 +1,102 @@
-// Java program to find celebrity using
-// stack data structure
-import java.util.Stack;
+class CustomStack {
+    private int[] stack;
+    private int top;
 
-class GFG {
-	// Person with 2 is celebrity
-	static int MATRIX[][] = { { 0, 0, 1, 0 },
-							{ 0, 0, 1, 0 },
-							{ 0, 0, 0, 0 },
-							{ 0, 0, 1, 0 } };
+    public CustomStack(int capacity) {
+        stack = new int[capacity];
+        top = -1;
+    }
 
-	// Returns true if a knows
-	// b, false otherwise
-	static boolean knows(int a, int b)
-	{
-		boolean res = (MATRIX[a][b] == 1) ? true : false;
-		return res;
-	}
+    public void push(int item) {
+        if (top == stack.length - 1) {
+            // Stack is full, handle overflow if needed
+            System.out.println("Stack overflow!");
+        } else {
+            stack[++top] = item;
+        }
+    }
 
-	// Returns -1 if celebrity
-	// is not present. If present,
-	// returns id (value from 0 to n-1).
-	static int findCelebrity(int n)
-	{
-		Stack<Integer> st = new Stack<>();
-		int c;
+    public int pop() {
+        if (top == -1) {
+            // Stack is empty, handle underflow if needed
+            System.out.println("Stack underflow!");
+            return -1; // Placeholder for underflow handling
+        } else {
+            return stack[top--];
+        }
+    }
 
-		// Step 1 :Push everybody
-		// onto stack
-		for (int i = 0; i < n; i++) {
-			st.push(i);
-		}
+    public int peek() {
+        if (top == -1) {
+            // Stack is empty, handle empty stack if needed
+            System.out.println("Stack is empty!");
+            return -1; // Placeholder for empty stack handling
+        } else {
+            return stack[top];
+        }
+    }
 
-		while (st.size() > 1) {
-			// Step 2 :Pop off top
-			// two persons from the
-			// stack, discard one
-			// person based on return
-			// status of knows(A, B).
-			int a = st.pop();
-			int b = st.pop();
-
-			// Step 3 : Push the
-			// remained person onto stack.
-			if (knows(a, b)) {
-				st.push(b);
-			}
-
-			else
-				st.push(a);
-		}
-
-		// If there are only two people
-		// and there is no
-		// potential candidate
-		if (st.empty())
-			return -1;
-
-		c = st.pop();
-
-		// Step 5 : Check if the last
-		// person is celebrity or not
-		for (int i = 0; i < n; i++) {
-			// If any person doesn't
-			// know 'c' or 'a' doesn't
-			// know any person, return -1
-			if (i != c && (knows(c, i) || !knows(i, c)))
-				return -1;
-		}
-		return c;
-	}
-
-	// Driver Code
-	public static void main(String[] args)
-	{
-		int n = 4;
-		int result = findCelebrity(n);
-		if (result == -1) {
-			System.out.println("No Celebrity");
-		}
-		else
-			System.out.println("Celebrity ID " + result);
-	}
+    public boolean isEmpty() {
+        return top == -1;
+    }
 }
 
-// This code is contributed
-// by Rishabh Mahrsee
+public class CelebrityFinder {
+
+    // Function to find the celebrity in the party
+    static int findCelebrity(int[][] matrix, int n) {
+        CustomStack stack = new CustomStack(n);
+
+        // Push all people onto the stack
+        for (int i = 0; i < n; i++) {
+            stack.push(i);
+        }
+
+        // Pop off pairs until only one person remains (potential celebrity)
+        while (stack.peek() != -1 && stack.peek() != stack.pop()) {
+            int personB = stack.pop();
+            int personA = stack.pop();
+
+            // If personA knows personB, personA cannot be the celebrity; push personB
+            if (matrix[personA][personB] == 1) {
+                stack.push(personB);
+            }
+            // If personA doesn't know personB, personB cannot be the celebrity; push personA
+            else {
+                stack.push(personA);
+            }
+        }
+
+        // Check if the potential celebrity is known to everyone
+        int potentialCelebrity = stack.pop();
+        for (int i = 0; i < n; i++) {
+            if (i != potentialCelebrity && (matrix[potentialCelebrity][i] == 1 || matrix[i][potentialCelebrity] == 0)) {
+                // The potential celebrity knows someone or someone doesn't know the potential celebrity
+                return -1; // No celebrity found
+            }
+        }
+
+        return potentialCelebrity;
+    }
+
+    public static void main(String[] args) {
+        int[][] matrix = {
+                {0, 0, 1, 0},
+                {0, 0, 1, 0},
+                {0, 0, 0, 0},
+                {0, 0, 1, 0}
+        };
+
+        int n = matrix.length;
+
+        // Find the celebrity
+        int celebrityId = findCelebrity(matrix, n);
+
+        // Display the result
+        if (celebrityId != -1) {
+            System.out.println("Celebrity found with ID: " + celebrityId);
+        } else {
+            System.out.println("No celebrity found in the party.");
+        }
+    }
+}

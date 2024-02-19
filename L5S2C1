@@ -1,0 +1,76 @@
+public class RotateMatrixClockwise {
+
+    // Function to rotate an N x N matrix clockwise
+    static void rotateMatrixClockwise(int[][] matrix) {
+        int n = matrix.length;
+
+        // Traverse the matrix layer by layer
+        for (int layer = 0; layer < n / 2; layer++) {
+            int first = layer;
+            int last = n - 1 - layer;
+
+            // Iterate for each element in the current layer
+            for (int i = first; i < last; i++) {
+                // Store the current element
+                int temp = matrix[first][i];
+
+                // Move values from the right to the top
+                matrix[first][i] = matrix[last - (i - first)][first];
+
+                // Move values from the bottom to the right
+                matrix[last - (i - first)][first] = matrix[last][last - (i - first)];
+
+                // Move values from the left to the bottom
+                matrix[last][last - (i - first)] = matrix[i][last];
+
+                // Move the stored element to the left
+                matrix[i][last] = temp;
+            }
+        }
+    }
+
+    // Function to print a matrix
+    static void printMatrix(int[][] matrix) {
+        for (int[] row : matrix) {
+            for (int num : row) {
+                System.out.print(num + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        // Example 3x3 matrix
+        int[][] matrix3x3 = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+
+        System.out.println("Original Matrix (3x3):");
+        printMatrix(matrix3x3);
+
+        // Rotate the matrix clockwise
+        rotateMatrixClockwise(matrix3x3);
+
+        System.out.println("\nRotated Matrix Clockwise (3x3):");
+        printMatrix(matrix3x3);
+
+        // Example 4x4 matrix
+        int[][] matrix4x4 = {
+                {1, 2, 3, 4},
+                {5, 6, 7, 8},
+                {9, 10, 11, 12},
+                {13, 14, 15, 16}
+        };
+
+        System.out.println("\nOriginal Matrix (4x4):");
+        printMatrix(matrix4x4);
+
+        // Rotate the matrix clockwise
+        rotateMatrixClockwise(matrix4x4);
+
+        System.out.println("\nRotated Matrix Clockwise (4x4):");
+        printMatrix(matrix4x4);
+    }
+}

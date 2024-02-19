@@ -1,0 +1,38 @@
+public class DuplicateParenthesisChecker {
+
+    // Function to check if an expression has duplicate parenthesis
+    static boolean hasDuplicateParenthesis(String expression) {
+        int openCount = 0;  // Count of open parentheses within the current subexpression
+
+        // Iterate through each character in the expression
+        for (char ch : expression.toCharArray()) {
+            if (ch == '(') {
+                openCount++;
+            } else if (ch == ')') {
+                // If a closing parenthesis is encountered, check if duplicates were found within the subexpression
+                if (openCount > 0) {
+                    return true;  // Duplicate found
+                }
+                openCount = 0;  // Reset the count for the next subexpression
+            }
+        }
+
+        // If the loop completes without returning true, there are no duplicate parentheses
+        return false;
+    }
+
+    // Main method to test the function
+    public static void main(String[] args) {
+        // Example expressions
+        String expression1 = "((a+b)+((c+d)))";
+        String expression2 = "((a+b)+(c+d))";
+
+        // Check for duplicate parentheses in each expression
+        boolean result1 = hasDuplicateParenthesis(expression1);
+        boolean result2 = hasDuplicateParenthesis(expression2);
+
+        // Display the results
+        System.out.println("Expression 1 has duplicate parentheses: " + result1);
+        System.out.println("Expression 2 has duplicate parentheses: " + result2);
+    }
+}

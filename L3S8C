@@ -1,0 +1,92 @@
+// Interface representing a shape
+interface Shape {
+    double calculateArea();
+    double calculatePerimeter();
+}
+
+// Circle class implementing the Shape interface
+class Circle implements Shape {
+    private double radius;
+
+    // Constructor
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    // Implementing the calculateArea method for a circle
+    @Override
+    public double calculateArea() {
+        return Math.PI * radius * radius;
+    }
+
+    // Implementing the calculatePerimeter method for a circle
+    @Override
+    public double calculatePerimeter() {
+        return 2 * Math.PI * radius;
+    }
+}
+
+// Square class implementing the Shape interface
+class Square implements Shape {
+    private double side;
+
+    // Constructor
+    public Square(double side) {
+        this.side = side;
+    }
+
+    // Implementing the calculateArea method for a square
+    @Override
+    public double calculateArea() {
+        return side * side;
+    }
+
+    // Implementing the calculatePerimeter method for a square
+    @Override
+    public double calculatePerimeter() {
+        return 4 * side;
+    }
+}
+
+// Triangle class implementing the Shape interface
+class Triangle implements Shape {
+    private double side1;
+    private double side2;
+    private double side3;
+
+    // Constructor
+    public Triangle(double side1, double side2, double side3) {
+        this.side1 = side1;
+        this.side2 = side2;
+        this.side3 = side3;
+    }
+
+    // Implementing the calculateArea method for a triangle
+    @Override
+    public double calculateArea() {
+        // Using Heron's formula to calculate the area of a triangle
+        double s = (side1 + side2 + side3) / 2;
+        return Math.sqrt(s * (s - side1) * (s - side2) * (s - side3));
+    }
+
+    // Implementing the calculatePerimeter method for a triangle
+    @Override
+    public double calculatePerimeter() {
+        return side1 + side2 + side3;
+    }
+}
+
+// Main class to test the Shape hierarchy
+public class ShapeHierarchyTest {
+    public static void main(String[] args) {
+        // Creating instances of different shapes
+        Circle circle = new Circle(5.0);
+        Square square = new Square(4.0);
+        Triangle triangle = new Triangle(3.0, 4.0, 5.0);
+
+        // Calculating and displaying area and perimeter for each shape
+        System.out.println("Circle - Area: " + circle.calculateArea() + ", Perimeter: " + circle.calculatePerimeter());
+        System.out.println("Square - Area: " + square.calculateArea() + ", Perimeter: " + square.calculatePerimeter());
+        System.out.println("Triangle - Area: " + triangle.calculateArea() + ", Perimeter: " + triangle.calculatePerimeter());
+    }
+}

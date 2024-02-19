@@ -1,0 +1,62 @@
+public class CelebrityFinder {
+
+    // Function to find the celebrity in the party
+    static int findCelebrity(int[][] matrix, int n) {
+        int candidate = 0;
+
+        // Step 1: Find the potential celebrity
+        for (int i = 1; i < n; i++) {
+            if (knows(candidate, i, matrix)) {
+                // If candidate knows i, then candidate is not the celebrity, and i might be the celebrity
+                candidate = i;
+            }
+        }
+
+        // Step 2: Check if the potential celebrity is actually a celebrity
+        if (isCelebrity(candidate, matrix, n)) {
+            return candidate;
+        }
+
+        // If no celebrity found
+        return -1;
+    }
+
+    // Function to check if person a knows person b
+    static boolean knows(int a, int b, int[][] matrix) {
+        return matrix[a][b] == 1;
+    }
+
+    // Function to check if the given person is a celebrity
+    static boolean isCelebrity(int person, int[][] matrix, int n) {
+        for (int i = 0; i < n; i++) {
+            if (i != person && (knows(person, i, matrix) || !knows(i, person, matrix))) {
+                // If the person knows someone or someone doesn't know the person, then person is not a celebrity
+                return false;
+            }
+        }
+        // If the loop completes, the person is a celebrity
+        return true;
+    }
+
+    // Main method to test the function
+    public static void main(String[] args) {
+        int[][] matrix = {
+                {0, 0, 1, 0},
+                {0, 0, 1, 0},
+                {0, 0, 0, 0},
+                {0, 0, 1, 0}
+        };
+
+        int n = matrix.length;
+
+        // Find the celebrity
+        int celebrityId = findCelebrity(matrix, n);
+
+        // Display the result
+        if (celebrityId != -1) {
+            System.out.println("Celebrity found with ID: " + celebrityId);
+        } else {
+            System.out.println("No celebrity found in the party.");
+        }
+    }
+}

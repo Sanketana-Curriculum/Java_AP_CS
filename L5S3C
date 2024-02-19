@@ -1,0 +1,54 @@
+public class PythagoreanTriplet {
+
+    // Function to check if there is a Pythagorean triplet in the array
+    static boolean hasPythagoreanTriplet(int[] arr) {
+        int n = arr.length;
+
+        // Square each element in the array
+        for (int i = 0; i < n; i++) {
+            arr[i] = arr[i] * arr[i];
+        }
+
+        // Sort the squared array
+        Arrays.sort(arr);
+
+        // Check for Pythagorean triplet using Two-pointer approach
+        for (int i = n - 1; i >= 2; i--) {
+            int left = 0;
+            int right = i - 1;
+
+            while (left < right) {
+                int sum = arr[left] + arr[right];
+
+                if (sum == arr[i]) {
+                    // Triplet found
+                    return true;
+                } else if (sum < arr[i]) {
+                    // Increase the sum by moving the left pointer to the right
+                    left++;
+                } else {
+                    // Decrease the sum by moving the right pointer to the left
+                    right--;
+                }
+            }
+        }
+
+        // No triplet found
+        return false;
+    }
+
+    public static void main(String[] args) {
+        // Example array
+        int[] arr = {3, 2, 4, 6, 5};
+
+        // Check for Pythagorean triplet
+        boolean result = hasPythagoreanTriplet(arr);
+
+        // Display the result
+        if (result) {
+            System.out.println("Yes, there is a Pythagorean triplet in the array.");
+        } else {
+            System.out.println("No, there is no Pythagorean triplet in the array.");
+        }
+    }
+}

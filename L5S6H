@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class ArrayManipulation {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Create an array of integers
+        int[] numbers = {1, 2, 3, 4, 5};
+        
+        // Prompt the user to enter an index
+        System.out.print("Enter an index: ");
+        int index = scanner.nextInt();
+        
+        // Attempt to access the element at the specified index and handle array index out of bounds exception
+        try {
+            int value = numbers[index];
+            System.out.println("Value at index " + index + ": " + value);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            // Invalid index
+            System.out.println("Error: Invalid index.");
+        }
+        
+        scanner.close();
+    }
+}

@@ -1,0 +1,40 @@
+public class TrianglePerimeter {
+    public static void main(String[] args) {
+        // Test cases
+        double[] arr1 = {15, 7, 5, 22, 11, 1};
+        double[] arr2 = {0, 0, 0, 1, 1, 0};
+        double[] arr3 = {-10, -10, 10, 10, -10, 10};
+        
+        // Calculate and print the perimeter for each test case
+        System.out.println("Perimeter 1: " + perimeter(arr1));
+        System.out.println("Perimeter 2: " + perimeter(arr2));
+        System.out.println("Perimeter 3: " + perimeter(arr3));
+    }
+
+    // Function to calculate the distance between two points
+    public static double distance(double x1, double y1, double x2, double y2) {
+        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    }
+
+    // Function to calculate the perimeter of a triangle given the coordinates of its vertices
+    public static double perimeter(double[] arr) {
+        // Extract coordinates from the input array
+        double x1 = arr[0];
+        double y1 = arr[1];
+        double x2 = arr[2];
+        double y2 = arr[3];
+        double x3 = arr[4];
+        double y3 = arr[5];
+
+        // Calculate the distances between the vertices
+        double side1 = distance(x1, y1, x2, y2);
+        double side2 = distance(x2, y2, x3, y3);
+        double side3 = distance(x3, y3, x1, y1);
+
+        // Calculate the perimeter
+        double perimeter = side1 + side2 + side3;
+
+        // Round the perimeter to two decimal places
+        return Math.round(perimeter * 100.0) / 100.0;
+    }
+}

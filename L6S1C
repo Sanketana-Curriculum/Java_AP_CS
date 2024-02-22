@@ -1,0 +1,42 @@
+public class RobotMovement {
+
+    public static int[] trackRobot(int... steps) {
+        int[] position = new int[2]; // Initialize position at (0, 0)
+        int direction = 0; // 0: North, 1: East, 2: South, 3: West
+
+        for (int step : steps) {
+            // Update position based on the current direction
+            switch (direction) {
+                case 0: // North
+                    position[1] += step;
+                    break;
+                case 1: // East
+                    position[0] += step;
+                    break;
+                case 2: // South
+                    position[1] -= step;
+                    break;
+                case 3: // West
+                    position[0] -= step;
+                    break;
+            }
+
+            // Update direction (rotate 90 degrees clockwise)
+            direction = (direction + 1) % 4;
+        }
+
+        return position;
+    }
+
+    public static void main(String[] args) {
+        // Test cases
+        int[] result1 = trackRobot(20, 30, 10, 40);
+        System.out.println("trackRobot(20, 30, 10, 40) ➞ [" + result1[0] + ", " + result1[1] + "]");
+
+        int[] result2 = trackRobot();
+        System.out.println("trackRobot() ➞ [" + result2[0] + ", " + result2[1] + "]");
+
+        int[] result3 = trackRobot(-10, 20, 10);
+        System.out.println("trackRobot(-10, 20, 10) ➞ [" + result3[0] + ", " + result3[1] + "]");
+    }
+}

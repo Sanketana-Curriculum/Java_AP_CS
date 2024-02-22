@@ -1,0 +1,53 @@
+public class SecretMessages {
+
+    // Function to encrypt the given string
+    public static int[] encrypt(String message) {
+        // Convert the string to char array
+        char[] chars = message.toCharArray();
+
+        // Array to store the encrypted message
+        int[] encrypted = new int[chars.length];
+
+        // Calculate the character codes and differences
+        encrypted[0] = chars[0];  // First character code
+        for (int i = 1; i < chars.length; i++) {
+            encrypted[i] = chars[i] - chars[i - 1];  // Differences between characters
+        }
+
+        return encrypted;
+    }
+
+    // Function to decrypt the given array
+    public static String decrypt(int[] encrypted) {
+        // Array to store the decrypted characters
+        char[] decrypted = new char[encrypted.length];
+
+        // Calculate the characters based on character codes and differences
+        decrypted[0] = (char) encrypted[0];  // First character
+        for (int i = 1; i < encrypted.length; i++) {
+            decrypted[i] = (char) (decrypted[i - 1] + encrypted[i]);  // Add difference to previous character
+        }
+
+        return new String(decrypted);  // Convert char array to string
+    }
+
+    // Main method to test the functions
+    public static void main(String[] args) {
+        // Test cases
+        int[] encrypted1 = encrypt("Hello");
+        System.out.print("Encrypted: ");
+        for (int num : encrypted1) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+
+        int[] encrypted2 = { 72, 33, -73, 84, -12, -3, 13, -13, -68 };
+        System.out.println("Decrypted: " + decrypt(encrypted2));
+
+        int[] encrypted3 = encrypt("Sunshine");
+        System.out.print("Encrypted: ");
+        for (int num : encrypted3) {
+            System.out.print(num + " ");
+        }
+    }
+}

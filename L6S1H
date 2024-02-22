@@ -1,0 +1,28 @@
+public class TriangleFit {
+
+    // Function to check if the first triangle fits into the second one
+    public static boolean doesTriangleFit(int[] triangle1, int[] triangle2) {
+        // Check if each side of triangle1 is less than or equal to the corresponding side of triangle2
+        // If any side of triangle1 is larger than the corresponding side of triangle2, return false
+        return triangle1[0] <= triangle2[0] && triangle1[1] <= triangle2[1] && triangle1[2] <= triangle2[2];
+    }
+
+    public static void main(String[] args) {
+        // Test cases
+        int[] triangle1 = {1, 1, 1};
+        int[] triangle2 = {1, 1, 1};
+        System.out.println("doesTriangleFit([1, 1, 1], [1, 1, 1]) ➞ " + doesTriangleFit(triangle1, triangle2));
+
+        triangle1 = new int[]{1, 1, 1};
+        triangle2 = new int[]{2, 2, 2};
+        System.out.println("doesTriangleFit([1, 1, 1], [2, 2, 2]) ➞ " + doesTriangleFit(triangle1, triangle2));
+
+        triangle1 = new int[]{1, 2, 3};
+        triangle2 = new int[]{1, 2, 2};
+        System.out.println("doesTriangleFit([1, 2, 3], [1, 2, 2]) ➞ " + doesTriangleFit(triangle1, triangle2));
+
+        triangle1 = new int[]{1, 2, 4};
+        triangle2 = new int[]{1, 2, 6};
+        System.out.println("doesTriangleFit([1, 2, 4], [1, 2, 6]) ➞ " + doesTriangleFit(triangle1, triangle2));
+    }
+}

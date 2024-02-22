@@ -1,0 +1,29 @@
+public class QuadraticEquation {
+
+    // Function to calculate the number of solutions to a quadratic equation
+    public static int solutions(int a, int b, int c) {
+        // Calculate the discriminant
+        int discriminant = b * b - 4 * a * c;
+
+        // If discriminant is positive, there are two distinct real solutions
+        if (discriminant > 0) {
+            return 2;
+        }
+        // If discriminant is zero, there is one real solution (repeated root)
+        else if (discriminant == 0) {
+            return 1;
+        }
+        // If discriminant is negative, there are no real solutions
+        else {
+            return 0;
+        }
+    }
+
+    // Main method to test the function
+    public static void main(String[] args) {
+        // Test cases
+        System.out.println("solutions(1, 0, -1) ➞ " + solutions(1, 0, -1)); // ➞ 2
+        System.out.println("solutions(1, 0, 0) ➞ " + solutions(1, 0, 0)); // ➞ 1
+        System.out.println("solutions(1, 0, 1) ➞ " + solutions(1, 0, 1)); // ➞ 0
+    }
+}

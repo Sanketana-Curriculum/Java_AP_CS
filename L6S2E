@@ -1,0 +1,20 @@
+public class LCM {
+
+    // Function to calculate the Greatest Common Divisor (GCD) of two numbers
+    public static int gcd(int a, int b) {
+        if (b == 0)
+            return a;
+        return gcd(b, a % b);
+    }
+
+    // Function to calculate the Least Common Multiple (LCM) of two numbers
+    public static int lcm(int a, int b) {
+        return (a * b) / gcd(a, b);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(lcm(9, 18)); // Output: 18
+        System.out.println(lcm(8, 5)); // Output: 40
+        System.out.println(lcm(17, 11)); // Output: 187
+    }
+}

@@ -1,0 +1,81 @@
+public class InsertionSort {
+
+    public static void insertionSort(Object[] arr, String property) {
+        int n = arr.length;
+
+        for (int i = 1; i < n; i++) {
+            Object key = arr[i];
+            int j = i - 1;
+
+            // Move elements of arr[0..i-1], that are greater than key, to one position ahead of their current position
+            while (j >= 0 && compare(arr[j], key, property) > 0) {
+                arr[j + 1] = arr[j];
+                j = j - 1;
+            }
+            arr[j + 1] = key;
+        }
+    }
+
+    // Custom method to compare objects based on a specific property
+    public static int compare(Object obj1, Object obj2, String property) {
+        // Implement your comparison logic here
+        // Assuming obj1 and obj2 are of the same class and have the specified property
+        // Cast objects to appropriate class and compare the specified property
+        // For example:
+        // MyClass obj1 = (MyClass) obj1;
+        // MyClass obj2 = (MyClass) obj2;
+        // return obj1.getProperty().compareTo(obj2.getProperty());
+        return 0; // Placeholder return value
+    }
+
+    public static void main(String[] args) {
+        // Example usage:
+        // Define custom objects
+        MyClass[] arr = {
+            new MyClass("John", 25),
+            new MyClass("Alice", 30),
+            new MyClass("Bob", 20)
+        };
+
+        // Print original array
+        System.out.println("Original Array:");
+        for (MyClass obj : arr) {
+            System.out.println(obj);
+        }
+
+        // Sort array based on age property
+        insertionSort(arr, "age");
+
+        // Print sorted array
+        System.out.println("\nSorted Array:");
+        for (MyClass obj : arr) {
+            System.out.println(obj);
+        }
+    }
+}
+
+class MyClass {
+    private String name;
+    private int age;
+
+    // Constructor
+    public MyClass(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Getter methods
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    // Override toString method for printing object
+    @Override
+    public String toString() {
+        return "Name: " + name + ", Age: " + age;
+    }
+}

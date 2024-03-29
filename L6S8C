@@ -1,0 +1,100 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class ParallelPrimeNumberFinder {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the lower bound of the range: ");
+        int lowerBound = scanner.nextInt();
+
+        System.out.print("Enter the upper bound of the range: ");
+        int upperBound = scanner.nextInt();
+
+        System.out.println("Finding prime numbers between " + lowerBound + " and " + upperBound + "...");
+
+        List<Integer> primes = findPrimesInRange(lowerBound, upperBound);
+
+        System.out.println("Prime numbers between " + lowerBound + " and " + upperBound + ":");
+        for (int prime : primes) {
+            System.out.print(prime + " ");
+        }
+
+        scanner.close();
+    }
+
+    private static List<Integer> findPrimesInRange(int lowerBound, int upperBound) {
+        List<Integer> primes = new ArrayList<>();
+        List<PrimeNumberFinderThread> threads = new ArrayList<>();
+
+        // Calculate the number of threads based on the available processors
+        int numThreads = Runtime.getRuntime().availableProcessors();
+
+        // Calculate the range for each thread
+        int rangePerThread = (upperBound - lowerBound + 1) / numThreads;
+        int start = lowerBound;
+        int end = start + rangePerThread - 1;
+
+        // Create threads to find primes within each range
+        for (int i = 0; i < numThreads; i++) {
+            if (i == numThreads - 1) {
+                // Last thread handles the remaining numbers
+                end = upperBound;
+            }
+            PrimeNumberFinderThread thread = new PrimeNumberFinderThread(start, end, primes);
+            threads.add(thread);
+            thread.start();
+
+            // Update start and end for the next thread
+            start = end + 1;
+            end = start + rangePerThread - 1;
+        }
+
+        // Wait for all threads to finish
+        for (PrimeNumberFinderThread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return primes;
+    }
+}
+
+class PrimeNumberFinderThread extends Thread {
+    private final int start;
+    private final int end;
+    private final List<Integer> primes;
+
+    public PrimeNumberFinderThread(int start, int end, List<Integer> primes) {
+        this.start = start;
+        this.end = end;
+        this.primes = primes;
+    }
+
+    @Override
+    public void run() {
+        for (int i = start; i <= end; i++) {
+            if (isPrime(i)) {
+                synchronized (primes) {
+                    primes.add(i);
+                }
+            }
+        }
+    }
+
+    private boolean isPrime(int n) {
+        if (n <= 1) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(n); i++) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}

@@ -1,0 +1,118 @@
+import java.util.Scanner;
+
+// Define an enum representing directional movement
+enum Direction {
+    UP, DOWN, LEFT, RIGHT
+}
+
+public class DirectionalMovementGame {
+    // Define constants for grid size
+    private static final int GRID_SIZE = 3;
+    private static final int MAX_STEPS = 5;
+
+    // Define variables for player position
+    private static int playerRow = 0;
+    private static int playerCol = 0;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welcome to the Directional Movement Game!");
+
+        // Initialize the grid
+        char[][] grid = initializeGrid();
+
+        // Display the initial grid
+        displayGrid(grid);
+
+        // Play the game
+        for (int steps = 1; steps <= MAX_STEPS; steps++) {
+            System.out.println("\nStep " + steps + "/" + MAX_STEPS + ": Enter direction (UP/DOWN/LEFT/RIGHT):");
+            String input = scanner.nextLine().toUpperCase();
+
+            // Validate input direction
+            if (!isValidDirection(input)) {
+                System.out.println("Invalid direction! Please enter UP, DOWN, LEFT, or RIGHT.");
+                continue;
+            }
+
+            // Move the player based on the input direction
+            movePlayer(Direction.valueOf(input));
+
+            // Display the updated grid
+            displayGrid(grid);
+
+            // Check if the player has reached the goal
+            if (playerRow == GRID_SIZE - 1 && playerCol == GRID_SIZE - 1) {
+                System.out.println("Congratulations! You reached the goal!");
+                break;
+            }
+        }
+
+        if (playerRow != GRID_SIZE - 1 || playerCol != GRID_SIZE - 1) {
+            System.out.println("You ran out of steps! Game over!");
+        }
+
+        scanner.close();
+    }
+
+    // Initialize the grid with obstacles and the player
+    private static char[][] initializeGrid() {
+        char[][] grid = new char[GRID_SIZE][GRID_SIZE];
+        // Place obstacles randomly in the grid
+        for (int i = 0; i < GRID_SIZE; i++) {
+            for (int j = 0; j < GRID_SIZE; j++) {
+                grid[i][j] = (Math.random() < 0.2) ? 'X' : '.';
+            }
+        }
+        // Place the player at the starting position
+        grid[0][0] = 'P';
+        return grid;
+    }
+
+    // Display the grid
+    private static void displayGrid(char[][] grid) {
+        System.out.println("Current grid:");
+        for (int i = 0; i < GRID_SIZE; i++) {
+            for (int j = 0; j < GRID_SIZE; j++) {
+                System.out.print(grid[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    // Move the player based on the input direction
+    private static void movePlayer(Direction direction) {
+        switch (direction) {
+            case UP:
+                if (playerRow > 0) {
+                    playerRow--;
+                }
+                break;
+            case DOWN:
+                if (playerRow < GRID_SIZE - 1) {
+                    playerRow++;
+                }
+                break;
+            case LEFT:
+                if (playerCol > 0) {
+                    playerCol--;
+                }
+                break;
+            case RIGHT:
+                if (playerCol < GRID_SIZE - 1) {
+                    playerCol++;
+                }
+                break;
+        }
+    }
+
+    // Validate the input direction
+    private static boolean isValidDirection(String direction) {
+        for (Direction d : Direction.values()) {
+            if (d.name().equals(direction)) {
+                return true;
+            }
+        }
+        return false;
+    }
+}

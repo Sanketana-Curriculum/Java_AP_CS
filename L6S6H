@@ -1,0 +1,97 @@
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int val) {
+        this.val = val;
+        this.next = null;
+    }
+}
+
+public class MergeSortLinkedList {
+    public static void main(String[] args) {
+        // Example usage
+        ListNode head = new ListNode(3);
+        head.next = new ListNode(1);
+        head.next.next = new ListNode(4);
+        head.next.next.next = new ListNode(2);
+        head.next.next.next.next = new ListNode(5);
+
+        System.out.println("Original list:");
+        printList(head);
+
+        head = mergeSort(head);
+
+        System.out.println("\nSorted list:");
+        printList(head);
+    }
+
+    public static ListNode mergeSort(ListNode head) {
+        if (head == null || head.next == null) {
+            return head; // Base case: list is empty or has only one element
+        }
+
+        // Split the list into two halves
+        ListNode[] halves = splitList(head);
+
+        // Recursively sort each half
+        ListNode leftHalf = mergeSort(halves[0]);
+        ListNode rightHalf = mergeSort(halves[1]);
+
+        // Merge the sorted halves
+        return merge(leftHalf, rightHalf);
+    }
+
+    private static ListNode[] splitList(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head.next;
+
+        // Use fast and slow pointers to find the middle of the list
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // Split the list at the middle node
+        ListNode mid = slow.next;
+        slow.next = null;
+
+        return new ListNode[]{head, mid};
+    }
+
+    private static ListNode merge(ListNode left, ListNode right) {
+        ListNode dummy = new ListNode(0);
+        ListNode current = dummy;
+
+        // Merge the two sorted lists
+        while (left != null && right != null) {
+            if (left.val < right.val) {
+                current.next = left;
+                left = left.next;
+            } else {
+                current.next = right;
+                right = right.next;
+            }
+            current = current.next;
+        }
+
+        // Append any remaining nodes from either list
+        if (left != null) {
+            current.next = left;
+        }
+        if (right != null) {
+            current.next = right;
+        }
+
+        return dummy.next;
+    }
+
+    private static void printList(ListNode head) {
+        ListNode current = head;
+        while (current != null) {
+            System.out.print(current.val + " ");
+            current = current.next;
+        }
+        System.out.println();
+    }
+}

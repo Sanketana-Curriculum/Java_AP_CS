@@ -1,0 +1,75 @@
+// Define an enum representing the suits of playing cards
+enum Suit {
+    HEARTS, DIAMONDS, CLUBS, SPADES
+}
+
+// Define an enum representing the card values
+enum Value {
+    ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING
+}
+
+// Define a class representing a playing card
+class Card {
+    private final Suit suit;
+    private final Value value;
+
+    // Constructor to initialize a card with a suit and value
+    public Card(Suit suit, Value value) {
+        this.suit = suit;
+        this.value = value;
+    }
+
+    // Method to get the suit of the card
+    public Suit getSuit() {
+        return suit;
+    }
+
+    // Method to get the value of the card
+    public Value getValue() {
+        return value;
+    }
+
+    // Method to display the card's suit and value
+    @Override
+    public String toString() {
+        return value + " of " + suit;
+    }
+}
+
+// Define a class representing a simple card game
+public class CardGame {
+    public static void main(String[] args) {
+        // Create an array to hold a deck of cards
+        Card[] deck = new Card[52];
+        int index = 0;
+
+        // Populate the deck with all possible combinations of suits and values
+        for (Suit suit : Suit.values()) {
+            for (Value value : Value.values()) {
+                deck[index++] = new Card(suit, value);
+            }
+        }
+
+        // Shuffle the deck
+        shuffle(deck);
+
+        // Deal and display the first 5 cards from the shuffled deck
+        System.out.println("Dealing 5 cards:");
+        for (int i = 0; i < 5; i++) {
+            System.out.println(deck[i]);
+        }
+    }
+
+    // Method to shuffle the deck of cards
+    public static void shuffle(Card[] deck) {
+        for (int i = deck.length - 1; i > 0; i--) {
+            // Generate a random index between 0 and i (inclusive)
+            int j = (int) (Math.random() * (i + 1));
+
+            // Swap the cards at positions i and j
+            Card temp = deck[i];
+            deck[i] = deck[j];
+            deck[j] = temp;
+        }
+    }
+}

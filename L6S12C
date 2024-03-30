@@ -1,0 +1,76 @@
+import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class BooleanExpressionEvaluator {
+    
+    // Method to simplify a boolean expression using DeMorgan's Laws
+    public static String simplifyBooleanExpression(String expression) {
+        // Apply DeMorgan's Laws to the expression
+        String simplifiedExpression = expression.replaceAll("\\(\\s*!\\((.*?)\\)\\)", "!($1)").replaceAll("\\s*&&\\s*", " || ")
+                                                 .replaceAll("\\s*\\|\\|\\s*", " && ").replaceAll("\\s*\\(\\s*!\\s*(.*?)\\s*\\)\\s*", "(!($1))")
+                                                 .replaceAll("\\s*\\(\\s*!\\s*\\((.*?)\\)\\s*\\)\\s*", "!($1)");
+        return simplifiedExpression;
+    }
+    
+    // Method to evaluate a boolean expression
+    public static boolean evaluateBooleanExpression(String expression) {
+        // Replace true and false with actual boolean values
+        expression = expression.replaceAll("true", "1").replaceAll("false", "0");
+        // Replace variable names with 1 for true and 0 for false
+        expression = expression.replaceAll("\\b[A-Za-z]\\b", "1").replaceAll("!\\s*\\b[A-Za-z]\\b", "0");
+        // Evaluate the expression
+        return evaluate(expression);
+    }
+    
+    // Method to evaluate the expression recursively
+    private static boolean evaluate(String expression) {
+        if (expression.matches("[01]")) {
+            return expression.equals("1");
+        }
+        Function<Boolean, Boolean> negate = b -> !b;
+        Function<Boolean, Boolean> and = b1 -> b2 -> b1 && b2;
+        Function<Boolean, Boolean> or = b1 -> b2 -> b1 || b2;
+        
+        Pattern pattern = Pattern.compile("(\\d|\\(|\\))");
+        Matcher matcher = pattern.matcher(expression);
+        
+        boolean result = true;
+        boolean op = true; // true represents AND, false represents OR
+        while (matcher.find()) {
+            String token = matcher.group();
+            if (token.matches("\\d")) {
+                boolean value = token.equals("1");
+                if (op) {
+                    result = and.apply(result).apply(value);
+                } else {
+                    result = or.apply(result).apply(value);
+                }
+            } else if (token.equals("(")) {
+                result = op ? and.apply(result).apply(evaluate(expression)) : or.apply(result).apply(evaluate(expression));
+            } else if (token.equals(")")) {
+                break;
+            } else {
+                op = token.equals("&&");
+            }
+        }
+        return result;
+    }
+    
+    // Method to check if the original and simplified expressions yield the same result
+    public static boolean checkEquivalence(String originalExpression, String simplifiedExpression) {
+        boolean originalResult = evaluateBooleanExpression(originalExpression);
+        boolean simplifiedResult = evaluateBooleanExpression(simplifiedExpression);
+        return originalResult == simplifiedResult;
+    }
+
+    public static void main(String[] args) {
+        String expression = "!((A && B) || (C && D))";
+        String simplifiedExpression = simplifyBooleanExpression(expression);
+        boolean areEquivalent = checkEquivalence(expression, simplifiedExpression);
+        
+        System.out.println("Original Expression: " + expression);
+        System.out.println("Simplified Expression: " + simplifiedExpression);
+        System.out.println("Are both expressions equivalent? " + areEquivalent);
+    }
+}

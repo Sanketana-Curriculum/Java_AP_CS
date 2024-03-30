@@ -1,0 +1,82 @@
+import java.util.Scanner;
+
+public class NimGame {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Initialize the game with the number of piles and stones in each pile
+        int[] piles = {3, 4, 5}; // Example: 3 piles with 3, 4, and 5 stones respectively
+
+        // Start the game
+        playNim(piles, 0, true);
+
+        scanner.close();
+    }
+
+    // Method to play the game of Nim recursively
+    public static void playNim(int[] piles, int currentPile, boolean isPlayer1Turn) {
+        // Base case: Check if there are no stones left in any pile
+        if (areAllPilesEmpty(piles)) {
+            if (isPlayer1Turn) {
+                System.out.println("Player 1 wins!");
+            } else {
+                System.out.println("Player 2 wins!");
+            }
+            return;
+        }
+
+        // Display the current state of the game
+        System.out.println("Current state of piles: " + arrayToString(piles));
+
+        // Determine the maximum stones that can be removed from the current pile
+        int maxStonesToRemove = piles[currentPile];
+        System.out.println("Player " + (isPlayer1Turn ? "1" : "2") + "'s turn. Current pile: " + (currentPile + 1) +
+                ", Maximum stones to remove: " + maxStonesToRemove);
+
+        // Prompt the player to choose the number of stones to remove
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of stones to remove: ");
+        int stonesToRemove = scanner.nextInt();
+
+        // Validate the input
+        while (stonesToRemove < 1 || stonesToRemove > maxStonesToRemove) {
+            System.out.println("Invalid input. Please enter a number between 1 and " + maxStonesToRemove);
+            stonesToRemove = scanner.nextInt();
+        }
+
+        // Remove stones from the current pile
+        piles[currentPile] -= stonesToRemove;
+
+        // Switch to the next pile or player's turn
+        if (currentPile < piles.length - 1) {
+            // If there are more piles left, move to the next pile
+            playNim(piles, currentPile + 1, !isPlayer1Turn);
+        } else {
+            // If there are no more piles left, switch to the other player's turn
+            playNim(piles, 0, !isPlayer1Turn);
+        }
+    }
+
+    // Method to check if all piles are empty
+    public static boolean areAllPilesEmpty(int[] piles) {
+        for (int pile : piles) {
+            if (pile > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Method to convert an array to a string for display purposes
+    public static String arrayToString(int[] arr) {
+        StringBuilder sb = new StringBuilder("[");
+        for (int i = 0; i < arr.length; i++) {
+            sb.append(arr[i]);
+            if (i < arr.length - 1) {
+                sb.append(", ");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+}

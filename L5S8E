@@ -1,0 +1,35 @@
+import java.util.function.BiFunction;
+
+public class LambdaCalculations {
+    public static void main(String[] args) {
+        int num1 = 20;
+        int num2 = 10;
+
+        // Perform addition using lambda expression
+        BiFunction<Integer, Integer, Integer> addition = (a, b) -> a + b;
+        int sum = performOperation(addition, num1, num2);
+
+        // Perform subtraction using lambda expression
+        BiFunction<Integer, Integer, Integer> subtraction = (a, b) -> a - b;
+        int difference = performOperation(subtraction, num1, num2);
+
+        // Perform multiplication using lambda expression
+        BiFunction<Integer, Integer, Integer> multiplication = (a, b) -> a * b;
+        int product = performOperation(multiplication, num1, num2);
+
+        // Perform division using lambda expression
+        BiFunction<Integer, Integer, Integer> division = (a, b) -> a / b;
+        int quotient = performOperation(division, num1, num2);
+
+        // Print the results
+        System.out.println("Addition: " + sum);
+        System.out.println("Subtraction: " + difference);
+        System.out.println("Multiplication: " + product);
+        System.out.println("Division: " + quotient);
+    }
+
+    // Method to perform an operation using a lambda expression
+    private static int performOperation(BiFunction<Integer, Integer, Integer> operation, int num1, int num2) {
+        return operation.apply(num1, num2);
+    }
+}

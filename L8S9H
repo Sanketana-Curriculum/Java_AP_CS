@@ -1,0 +1,34 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class StringPermutations {
+    public static void main(String[] args) {
+        String input = "abc"; // Given string
+        List<String> permutations = findPermutations(input); // Find permutations
+        System.out.println("Permutations of \"" + input + "\": " + permutations);
+    }
+
+    // Method to find all possible permutations of a string
+    public static List<String> findPermutations(String str) {
+        List<String> result = new ArrayList<>();
+        // Base case: If the string has only one character, return a list containing the string itself
+        if (str.length() == 1) {
+            result.add(str);
+            return result;
+        }
+        // Iterate through each character of the string
+        for (int i = 0; i < str.length(); i++) {
+            // Extract the current character
+            char currentChar = str.charAt(i);
+            // Generate the remaining string after removing the current character
+            String remainingChars = str.substring(0, i) + str.substring(i + 1);
+            // Recursively find permutations of the remaining characters
+            List<String> permutationsOfRemaining = findPermutations(remainingChars);
+            // Add the current character to each permutation of the remaining characters
+            for (String permutation : permutationsOfRemaining) {
+                result.add(currentChar + permutation);
+            }
+        }
+        return result;
+    }
+}

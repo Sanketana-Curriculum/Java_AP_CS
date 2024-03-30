@@ -1,0 +1,22 @@
+public class TilingProblem {
+    public static void main(String[] args) {
+        int wallSize = 4; // Size of the wall (2xN)
+        int ways = countWaysToTile(wallSize); // Count the number of ways to tile the wall
+        System.out.println("Number of ways to tile the wall: " + ways);
+    }
+
+    // Method to count the number of ways to tile a 2xN wall using 2x1 tiles
+    public static int countWaysToTile(int n) {
+        // Base cases:
+        // If the wall size is 0 or 1, there is only one way to tile it
+        if (n == 0 || n == 1) {
+            return 1;
+        }
+        // Recursive case:
+        // At each step, we have two choices:
+        // 1. Place a horizontal tile (2x1) vertically, reducing the wall size by 1
+        // 2. Place two horizontal tiles (2x1) horizontally, reducing the wall size by 2
+        // The total number of ways is the sum of the number of ways obtained by each choice
+        return countWaysToTile(n - 1) + countWaysToTile(n - 2);
+    }
+}

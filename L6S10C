@@ -1,0 +1,83 @@
+import java.util.Arrays;
+
+public class NQueensProblem {
+    // Method to solve the N-Queens problem
+    public static void solveNQueens(int n) {
+        int[][] board = new int[n][n]; // Create a chessboard of size N×N
+        if (solveNQueensUtil(board, 0)) {
+            // Print the solution if found
+            printBoard(board);
+        } else {
+            // Print no solution if not found
+            System.out.println("No solution exists for N = " + n);
+        }
+    }
+
+    // Utility method to solve the N-Queens problem recursively
+    private static boolean solveNQueensUtil(int[][] board, int col) {
+        // Base case: If all queens are placed, return true
+        if (col == board.length) {
+            return true;
+        }
+
+        // Try placing queen in each row of current column
+        for (int i = 0; i < board.length; i++) {
+            if (isSafe(board, i, col)) {
+                // Place the queen at board[i][col] if it's safe
+                board[i][col] = 1;
+
+                // Recur to place the rest of the queens
+                if (solveNQueensUtil(board, col + 1)) {
+                    return true;
+                }
+
+                // If placing queen at board[i][col] doesn't lead to a solution,
+                // backtrack and try placing queen in another row
+                board[i][col] = 0;
+            }
+        }
+        // If queen cannot be placed in any row of current column, return false
+        return false;
+    }
+
+    // Method to check if it's safe to place a queen at board[row][col]
+    private static boolean isSafe(int[][] board, int row, int col) {
+        int i, j;
+
+        // Check this row on the left side
+        for (i = 0; i < col; i++) {
+            if (board[row][i] == 1) {
+                return false;
+            }
+        }
+
+        // Check upper diagonal on left side
+        for (i = row, j = col; i >= 0 && j >= 0; i--, j--) {
+            if (board[i][j] == 1) {
+                return false;
+            }
+        }
+
+        // Check lower diagonal on left side
+        for (i = row, j = col; j >= 0 && i < board.length; i++, j--) {
+            if (board[i][j] == 1) {
+                return false;
+            }
+        }
+        // If no conflicts found, it's safe to place queen at board[row][col]
+        return true;
+    }
+
+    // Method to print the chessboard with queen placements
+    private static void printBoard(int[][] board) {
+        for (int[] row : board) {
+            System.out.println(Arrays.toString(row));
+        }
+    }
+
+    // Main method to test the solution
+    public static void main(String[] args) {
+        int n = 4; // Size of the chessboard
+        solveNQueens(n);
+    }
+}

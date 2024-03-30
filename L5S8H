@@ -1,0 +1,32 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+public class LambdaSearching {
+    public static void main(String[] args) {
+        // Sample list of integers
+        List<Integer> numbers = new ArrayList<>();
+        numbers.add(10);
+        numbers.add(20);
+        numbers.add(30);
+        numbers.add(40);
+        numbers.add(20);
+        numbers.add(50);
+
+        // Number to search for
+        int target = 20;
+
+        // Find the index of the first occurrence of the target number using lambda expressions
+        Optional<Integer> firstIndex = numbers.stream()
+                                              .filter(number -> number == target)
+                                              .findFirst();
+
+        // Print the index of the first occurrence of the target number
+        if (firstIndex.isPresent()) {
+            int index = numbers.indexOf(firstIndex.get());
+            System.out.println("Index of the first occurrence of " + target + ": " + index);
+        } else {
+            System.out.println("Number " + target + " not found in the list.");
+        }
+    }
+}

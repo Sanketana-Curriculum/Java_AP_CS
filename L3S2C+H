@@ -16,14 +16,16 @@ public class Car {
   public void stop() {
     System.out.println(name + " has stopped.");
   }
-Car myCar = new Car();
-myCar.color = "Red";
-myCar.make = "Toyota";
 
-myCar.run(50); 
-// Prints "myCar is running at 50 mph"
-
-myCar.stop();
-// Prints "myCar has stopped."
-
+  // main method
+  public static void main(String[] args) {
+    Car myCar = new Car();
+    myCar.color = "Red";
+    myCar.make = "Toyota";
+    myCar.name = "myCar"; // Set the name of the car
+    myCar.run(50); 
+    // Prints "myCar is running at 50 mph"
+    myCar.stop();
+    // Prints "myCar has stopped."
+  }
 }

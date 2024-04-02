@@ -2,69 +2,64 @@ public class Pizza {
 
   private String size;
   private String crust;
-  private String[] toppings;
-  
+  private String[] toppings; // Using simple array instead of ArrayList
+
+  // Overloaded constructors
   public Pizza() {
     this.size = "Medium";
     this.crust = "Regular";
-    this.toppings = new String[5];
+    this.toppings = new String[3]; // Initialize toppings array with size 3
   }
 
   public Pizza(String size) {
     this.size = size;
     this.crust = "Regular";
-    this.toppings = new String[5]; 
+    this.toppings = new String[3]; // Initialize toppings array with size 3
   }
 
   public Pizza(String size, String crust) {
     this.size = size;
     this.crust = crust;
-    this.toppings = new String[5];
+    this.toppings = new String[3]; // Initialize toppings array with size 3
   }
 
-  public String getSize() {
-    return this.size;
-  }
-  
-  public void setSize(String size) {
-    this.size = size;
-  }
-  
-  public String getCrust() {
-    return this.crust;
-  }
-  
-  public void setCrust(String crust) {
-    this.crust = crust;
-  }
-  
-  public String[] getToppings() {
-    return this.toppings;
-  }
+  // Setters and getters
 
+  // Add topping method
   public void addTopping(String topping) {
-    for(int i = 0; i < toppings.length; i++) {
-      if(toppings[i] == null) {
-        toppings[i] = topping;
-        break;
-      }
+    // Find the first available index in toppings array
+    int index = 0;
+    while (index < toppings.length && toppings[index] != null) {
+      index++;
     }
+    // If toppings array is full, increase its size by 3
+    if (index == toppings.length) {
+      String[] newToppings = new String[toppings.length + 3];
+      // Copy existing toppings to the new array
+      System.arraycopy(toppings, 0, newToppings, 0, toppings.length);
+      toppings = newToppings;
+    }
+    // Add the topping to the toppings array
+    toppings[index] = topping;
   }
 
+  // Order summary method
   public void printOrder() {
-    System.out.println("Pizza Details:");
-    System.out.println("- Size: " + this.size);
-    System.out.println("- Crust: " + this.crust);
-    System.out.print("- Toppings: ");
-    for(String topping : this.toppings) {
-      if(topping != null) {
-        System.out.print(topping + " "); 
+    // Print order details
+    System.out.println("Pizza Order:");
+    System.out.println("Size: " + size);
+    System.out.println("Crust: " + crust);
+    System.out.println("Toppings:");
+    for (String topping : toppings) {
+      if (topping != null) {
+        System.out.println("- " + topping);
       }
     }
     System.out.println();
   }
-
+  
 }
+
 
 public class PizzaApp {
 

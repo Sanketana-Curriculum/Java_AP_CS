@@ -1,0 +1,26 @@
+public class NestedSwitchExample {
+    public static void main(String[] args) {
+        char ch1 = 'a';
+        char ch2 = 'b';
+
+        switch (ch1) {
+            case 'a':
+                System.out.println("Value of ch1 is 'a'");
+                switch (ch2) {
+                    case 'b':
+                        System.out.println("Value of ch2 is 'b'");
+                        System.out.println("Both 'a' and 'b' found!");
+                        break;
+                    default:
+                        System.out.println("Value of ch2 is not 'b'");
+                        System.out.println("Only 'a' found.");
+                        break;
+                }
+                break;
+            default:
+                System.out.println("Value of ch1 is not 'a'");
+                System.out.println("Neither 'a' nor 'b' found.");
+                break;
+        }
+    }
+}

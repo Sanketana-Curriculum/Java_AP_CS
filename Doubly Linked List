@@ -1,0 +1,108 @@
+// Node class represents a single node in the doubly linked list
+class Node {
+    int data; // Data stored in the node
+    Node prev; // Reference to the previous node
+    Node next; // Reference to the next node
+
+    // Constructor to create a new node with given data
+    public Node(int data) {
+        this.data = data;
+        this.prev = null;
+        this.next = null;
+    }
+}
+
+// DoublyLinkedList class represents the doubly linked list and its operations
+class DoublyLinkedList {
+    Node head; // Reference to the head of the list
+
+    // Constructor to initialize an empty list
+    public DoublyLinkedList() {
+        this.head = null;
+    }
+
+    // Method to insert a new node at the beginning of the list
+    public void insertAtBeginning(int data) {
+        Node newNode = new Node(data); // Create a new node
+        if (head == null) { // If list is empty, set head to the new node
+            head = newNode;
+        } else {
+            newNode.next = head; // Make new node point to current head
+            head.prev = newNode; // Make current head's previous point to new node
+            head = newNode; // Update head to the new node
+        }
+    }
+
+    // Method to insert a new node at the end of the list
+    public void insertAtEnd(int data) {
+        Node newNode = new Node(data); // Create a new node
+        if (head == null) { // If list is empty, set head to the new node
+            head = newNode;
+        } else {
+            Node last = head;
+            // Traverse to the last node
+            while (last.next != null) {
+                last = last.next;
+            }
+            last.next = newNode; // Make last node's next point to new node
+            newNode.prev = last; // Make new node's previous point to last node
+        }
+    }
+
+    // Method to delete a node with given data from the list
+    public void delete(int key) {
+        if (head == null) // If list is empty, do nothing
+            return;
+
+        if (head.data == key) { // If key is found at head
+            head = head.next;
+            if (head != null)
+                head.prev = null; // Make new head's previous null
+            return;
+        }
+
+        Node curr = head;
+        // Traverse the list to find the node with key
+        while (curr != null && curr.data != key) {
+            curr = curr.next;
+        }
+
+        if (curr == null) // If key is not found in the list
+            return;
+
+        // Adjust the pointers to delete the node
+        if (curr.prev != null)
+            curr.prev.next = curr.next;
+        if (curr.next != null)
+            curr.next.prev = curr.prev;
+    }
+
+    // Method to display all elements of the list
+    public void display() {
+        if (head == null) {
+            System.out.println("List is empty");
+            return;
+        }
+
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+
+    // Method to search for a given key in the list
+    public boolean search(int key) {
+        if (head == null) // If list is empty, return false
+            return false;
+
+        Node temp = head;
+        while (temp != null) {
+            if (temp.data == key)
+                return true;
+            temp = temp.next;
+        }
+        return false;
+    }
+}
